@@ -89,9 +89,9 @@
                 </p>
             </div>
 
-            <div v-for="m in messages" class="notification is-success is-light" v-if="m.isVisible">
+            <div v-for="m in messages" class="notification is-success is-light" v-show="m.isVisible">
               <button class="delete" @click="m.isVisible = false"></button>
-              {{ message }}
+              {{ m.text }}
             </div>
 
         </div>
