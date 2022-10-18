@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 
-    let isActive = ref(false);
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+import LoginBadge from './LoginBadge.vue';
+
+let isActive = ref(false);
+
 </script>
 
 <template>
@@ -20,49 +24,49 @@ import { ref } from 'vue';
 
 <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': isActive }">
     <div class="navbar-start">
-    <a class="navbar-item">
-        Home
-    </a>
+        <router-link to="/" class="navbar-item">
+              Home
+        </router-link>
+      
+        <router-link class="navbar-item" to="/store">
+              Store
+        </router-link>
 
-    <a class="navbar-item">
-        Documentation
-    </a>
-
-    <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-        More
-        </a>
-
-        <div class="navbar-dropdown">
-        <a class="navbar-item">
-            About
-        </a>
-        <a class="navbar-item">
-            Jobs
-        </a>
-        <a class="navbar-item">
-            Contact
-        </a>
-        <hr class="navbar-divider">
-        <a class="navbar-item">
-            Report an issue
-        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+                More
+            </a>
+            <div class="navbar-dropdown">
+            <a class="navbar-item">
+                About
+            </a>
+            <a class="navbar-item">
+                Jobs
+            </a>
+            <a class="navbar-item">
+                Contact
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item">
+                Report an issue
+            </a>
+            </div>
         </div>
-    </div>
     </div>
 
     <div class="navbar-end">
-    <div class="navbar-item">
-        <div class="buttons">
-        <a class="button is-primary">
-            <strong>Sign up</strong>
-        </a>
-        <a class="button is-light">
-            Log in
-        </a>
+        <div class="navbar-item">
+            <login-badge></login-badge>
         </div>
-    </div>
     </div>
 </div>
 </nav>
+
 </template>
+
+<style>
+    .router-link-active {
+        
+        border-bottom: #00AA00 5px solid;
+    }
+</style>

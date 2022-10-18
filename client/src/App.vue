@@ -1,5 +1,5 @@
 <script setup lang="ts"> //script labeled for vite to take and make setup function from it- default export
-  import { RouterLink, RouterView } from 'vue-router'
+  import { RouterView } from 'vue-router'
   import NavVue from './components/Nav.vue';
 </script>
 
