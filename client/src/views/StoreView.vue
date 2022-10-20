@@ -4,12 +4,13 @@ import { reactive } from 'vue';
   const items = [
       { name: 'Shoes', cost: 30, qty: 1},
       { name: 'Belt', cost: 20, qty: 1 },
-      { name: 'Socks', cost: 10, qty: 1 }
+      { name: 'Socks', cost: 10, qty: 1 },
   ]
 
   const cart = reactive( [
         { name: 'Shoes', cost: 30, qty: 1 },
         { name: 'Belt', cost: 20, qty: 1 },
+        { name: 'Socks', cost: 10, qty: 1 },
     ])
 
     function addToCart(item: any) {
