@@ -4,12 +4,21 @@
   import { ref } from 'vue';
   import { reactive } from "vue";
   import { getProducts } from "../stores/product";
-  import ProductsDetailsView from './ProductsDetailsView.vue';
 
   const products = (reactive(getProducts()));
   const search = ref("");
   
   const results = computed(() => products.filter((product) => product.title.toLowerCase().includes(search.value.toLowerCase())));
+
+  // Another way to handle this - imperative programming instead of functional programming //
+  //results can also be a reactive array with const results = reactive(products);
+  //convert json to typescript easy online -> put in stores/product.ts and include a productdocument and product inferface export (see professor's code)
+  //import type Product
+  //results can then be found with similar code as before but in searchProducts function
+  //call function in routerlink
+
+  //OR use watch!
+  //watch(search, searchProducts); firsrt param reactive, second is function to call when watch sees a changes
 
 </script>
 
