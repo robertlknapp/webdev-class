@@ -18,7 +18,10 @@
   //call function in routerlink
 
   //OR use watch!
-  //watch(search, searchProducts); firsrt param reactive, second is function to call when watch sees a changes
+  //watch(search, searchProducts); firsrt param reactive, second is function to call when watch sees a change
+
+  //OR:
+  //Add v-show="product.title..... etc. search case" to routerlink
 
 </script>
 
@@ -31,7 +34,10 @@
     </div>
 
     <div class="products">
-      <router-link class="product" v-for="product in results" :key="product.id" :to="`/product/${product.id}`">
+      <router-link class="product"
+                   v-for="product in results"
+                   :key="product.id"
+                   :to="`/product/${product.id}`">
         <div class="product-image">
           <img :src="product.thumbnail" alt="product image"/>
         </div>
