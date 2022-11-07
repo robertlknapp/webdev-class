@@ -11,7 +11,7 @@ const isCartOpen = ref(false);
 </script>
 
 <template>
-    <Cart :is-open="isCartOpen" />
+    <Cart :isOpen="isCartOpen" />
 
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">

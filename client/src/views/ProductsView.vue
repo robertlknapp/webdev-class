@@ -1,14 +1,18 @@
 <script setup lang="ts">
-
+  import { addProductToCart } from "@/stores/cart";
   import { computed } from '@vue/reactivity';
   import { ref } from 'vue';
   import { reactive } from "vue";
-  import { getProducts } from "../stores/product";
+  import { getProducts, type Product } from "../stores/product";
 
   const products = (reactive(getProducts()));
   const search = ref("");
   
   const results = computed(() => products.filter((product) => product.title.toLowerCase().includes(search.value.toLowerCase())));
+
+  function addToCart(product: Product) {
+    addProductToCart(product);
+  }
 
   // Another way to handle this - imperative programming instead of functional programming //
   //results can also be a reactive array with const results = reactive(products);
@@ -34,10 +38,10 @@
     </div>
 
     <div class="products">
-      <router-link class="product"
-                   v-for="product in results"
-                   :key="product.id"
-                   :to="`/product/${product.id}`">
+      <router-link class="product" v-for="product in results" :key="product.id" :to="`/product/${product.id}`">
+
+        <button class="button is-primary add" @click.prevent="addToCart(product)">+</button>
+
         <div class="product-image">
           <img :src="product.thumbnail" alt="product image"/>
         </div>
@@ -64,23 +68,35 @@
   .products {
     display: flex;
     flex-wrap: wrap;
-    background-color: aliceblue;
+    justify-content: center;
+    background-color: rgb(240, 255, 254);
   }
-
   .product {
-    flex-basis: 15em;
+    flex-basis: 18em;
     margin: 1em;
-    border: 1px solid black;
+    border: 1px solid lightgrey;
     border-radius: 5px;
     padding: 1em;
     background-color: white;
+    position: relative;
+    transition: 0.2s;
   }
-
+  .product:hover {
+    background-color: rgb(248, 248, 248);
+  }
   .product-info {
     font-size: small;
     padding: 1em;
+    color: black;
   }
 
+  .add {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 10px 15px;
+    border-radius: 50%;
+  }
   .price{
     display: flex;
     align-items:flex-start;

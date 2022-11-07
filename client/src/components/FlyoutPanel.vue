@@ -10,7 +10,7 @@
 <template>
     <div class="fly-out" :class="{ 'is-open': isOpen }">
         <div class="fly-out-body">
-            <div class="hero">
+            <div class="hero is-success">
                 <div class="hero-body">
                     <slot name="header" />
                 </div>
@@ -29,7 +29,7 @@
         bottom: 0;
         width: 20em;
         background-color: #ffffffaa;
-        border-left: 1px solid #000;
+        
         z-index: 100;
         transition: right 0.5s ease-in-out;
         box-shadow: rgb(0 0 0 / 25%) -14px -0 8px;
@@ -44,12 +44,9 @@
         margin: 1em;
         padding: 1em;
     }
-    .fly-out-header {
-        padding: 1em;
-        background-color: aquamarine;
-    }
-    .hero {
-        background-color: #1267a4aa;
-    }
 
+    .hero {
+        margin: -2em;
+        margin-bottom: 2em;
+    }
 </style>

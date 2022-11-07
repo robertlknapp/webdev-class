@@ -52,7 +52,7 @@ import { reactive } from 'vue';
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
   ul {
     display: flex;
 
