@@ -29,7 +29,7 @@ app
   })
   .use('/api/v1/products', productsController)
 
-//if we have a request that was handled by none of the previous -> probably client side 
+//if we have a request that was handled by none of the previous -> probably client side, give index.html
 app.get('*', (req,res) => {
   res.sendFile('index.html', {root: './client/dist'}); //can be security problem, need to be careful what files can be sent
 });
