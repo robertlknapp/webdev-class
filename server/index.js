@@ -13,9 +13,12 @@ app.use('/', express.static('./client/dist')); //handles static requests, again 
 //responds to get requests, repeatedly executed after pipeline is established for each request
 //once a request has been handled, nothing below that could also apply to it gets executed, only the first
 
-app.use((req, res, next) => { //next keyword calls next item in pipeline, passing control
-  res.setHeader('SUNY', 'MY SUNY');
-  next();
+//Headers sent with every request
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); //What origins can access
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE'); //What they can do
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); //Allowed response headers
+  next(); //next keyword calls next item in pipeline, passing control
 });
 
 app

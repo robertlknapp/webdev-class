@@ -5,7 +5,10 @@
   import { reactive } from "vue";
   import { getProducts, type Product } from "../stores/product";
 
-  const products = (reactive(getProducts()));
+  //initially getting a promise, using ref will update it when that promise is fullfiled
+  const products = reactive([] as Product[]);
+  getProducts().then( x => products.push(...x));
+
   const search = ref("");
   
   const results = computed(() => products.filter((product) => product.title.toLowerCase().includes(search.value.toLowerCase())));
