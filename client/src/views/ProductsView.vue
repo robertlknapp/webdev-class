@@ -7,7 +7,7 @@
 
   //initially getting a promise, using ref will update it when that promise is fullfiled
   const products = reactive([] as Product[]);
-  getProducts().then( x => products.push(...x));
+  getProducts().then( x => products.push(...x.products));
 
   const search = ref("");
   
