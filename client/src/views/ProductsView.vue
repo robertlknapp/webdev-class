@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { addProductToCart } from "@/stores/cart";
-  import { computed } from '@vue/reactivity';
-  import { ref } from 'vue';
-  import { reactive } from "vue";
+  import { RouterLink } from 'vue-router';
+  import { computed, watch, reactive, ref } from "vue";
+  import { isLoading } from "@/stores/session";
   import { getProducts, type Product } from "../stores/product";
 
   //initially getting a promise, using ref will update it when that promise is fullfiled
@@ -10,8 +10,6 @@
   getProducts().then( x => products.push(...x.products));
 
   const search = ref("");
-  
-  const results = computed(() => products.filter((product) => product.title.toLowerCase().includes(search.value.toLowerCase())));
 
   function addToCart(product: Product) {
     addProductToCart(product);
@@ -41,9 +39,9 @@
     </div>
 
     <div class="products">
-      <router-link class="product" v-for="product in results" :key="product.id" :to="`/product/${product.id}`">
+      <RouterLink class="product" :class="{ 'is-disabled': isLoading }" v-for="product in products" :key="product.id" :to="`/product/${product.id}`" v-show="product.title.toLowerCase().includes(search.toLowerCase())">
 
-        <button class="button is-primary add" @click.prevent="addToCart(product)">+</button>
+        <button class="button is-primary add" :class="{ 'is-loading': isLoading }" @click.prevent="addToCart(product)">+</button>
 
         <div class="product-image">
           <img :src="product.thumbnail" alt="product image"/>
@@ -60,7 +58,7 @@
             </span>
           </p>
         </div>
-      </router-link>
+      </RouterLink>
     </div>
 
   </div>
@@ -68,6 +66,10 @@
 </template>
 
 <style scoped>
+  .is-disabled {
+    pointer-events: none;
+    opacity: 0.7;
+  }
   .products {
     display: flex;
     flex-wrap: wrap;

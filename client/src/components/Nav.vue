@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import LoginBadge from './LoginBadge.vue';
 import Cart from './Cart.vue';
+import MessageList from './MessageList.vue';
 
 const isActive = ref(false);
 const isCartOpen = ref(false);
@@ -28,22 +29,22 @@ const isCartOpen = ref(false);
 
     <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': isActive }">
         <div class="navbar-start">
-            <router-link to="/" class="navbar-item">
+            <RouterLink to="/" class="navbar-item">
                 Home
-            </router-link>
+            </RouterLink>
         
-            <router-link class="navbar-item" to="/products">
+            <RouterLink class="navbar-item" to="/products">
                 Products
-            </router-link>
+            </RouterLink>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                     More
                 </a>
                 <div class="navbar-dropdown">
-                <router-link class="navbar-item" to="about">
+                <RouterLink class="navbar-item" to="about">
                     About
-                </router-link>
+                </RouterLink>
                 <a class="navbar-item">
                     Jobs
                 </a>
@@ -59,6 +60,7 @@ const isCartOpen = ref(false);
         </div>
 
         <div class="navbar-end">
+            <MessageList />
             <div class="navbar-item">
                 <button class="button is-primary" @click="isCartOpen = !isCartOpen">
                   <strong>Cart</strong>

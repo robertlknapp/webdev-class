@@ -1,14 +1,12 @@
 const express = require('express');
-const productsController = require('./controllers/products');
-
 const app = express();
+const productsController = require('./controllers/products');
+const cartController = require('./controllers/cart');
 
 const hostname = '127.0.0.1';
 const port = process.env.PORT || 3000;
 
 //Important to have static at top and "catch-all" at the bottom
-app.use('/', express.static('./client/dist')); //handles static requests, again be careful what files can be sent
-
 
 //responds to get requests, repeatedly executed after pipeline is established for each request
 //once a request has been handled, nothing below that could also apply to it gets executed, only the first
@@ -21,6 +19,10 @@ app.use((req, res, next) => {
   next(); //next keyword calls next item in pipeline, passing control
 });
 
+app.use('/', express.static('./client/dist')); //handles static requests, again be careful what files can be sent
+
+app.use(express.json());
+
 app
   .get('/', (req, res) => {
 
@@ -31,6 +33,7 @@ app
     sessss.port();
   })
   .use('/api/v1/products', productsController)
+  .use('/api/v1/cart', cartController)
 
 //if we have a request that was handled by none of the previous -> probably client side, give index.html
 app.get('*', (req,res) => {
@@ -42,7 +45,7 @@ app.use((err, req, res, next) => {
   console.log(err);
   res.status(err.httpCode ?? 500).send({
     message: err.message ?? 'Houston we have a problem',
-    status: err.httpCode ?? 500,
+    status: err.httpCode ?? 500
   }); //if httpcode for error exists, return that. Otherwise, generic 500 error
   //next(err) Error throwing done by putting err in next
 });
